@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
+using System.Collections;
+using UnityEngine.Events;
 
 public class DataLoader 
 {
@@ -8,28 +10,32 @@ public class DataLoader
     const string dataFileName = "data.json";
 
     public DataLoader(){
-        LoadGameData();
+
     }
 
     public GameData GetGameData(){
         return gameData;
     }
 
-    void LoadGameData(){
-        string filePath;
+    public IEnumerator LoadGameData (UnityAction callback)
+    {   
+        string filePath = Path.Combine(Application.streamingAssetsPath, dataFileName); 
         string dataAsJson;
-        
-        filePath = Path.Combine(Application.streamingAssetsPath, dataFileName); 
 
-        if (File.Exists(filePath)){
-            dataAsJson = File.ReadAllText(filePath);
+        if (filePath.Contains ("://") || filePath.Contains (":///")) 
+        {
+            UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get (filePath);
+            yield return www.SendWebRequest();
+            dataAsJson = www.downloadHandler.text;
+        } else 
+        {
+            dataAsJson = File.ReadAllText (filePath);
+        }
 
-            Debug.Log(dataAsJson);
-                    
-            gameData = JsonUtility.FromJson<GameData>(dataAsJson);                
-        }
-        else{
-            Debug.LogError("no game data file");
-        }
+        Debug.Log(dataAsJson);                    
+        gameData = JsonUtility.FromJson<GameData>(dataAsJson);
+
+        if (callback != null)                
+            callback();
     }
 }

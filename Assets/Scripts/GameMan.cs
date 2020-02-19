@@ -49,12 +49,13 @@ public class GameMan : MonoBehaviour
         dataLoader = new DataLoader();
         player = new Player();
 
-        onDataLoaded();
+        StartCoroutine(dataLoader.LoadGameData(onDataLoaded));
 
         guiMan.Init();
     }
 
     void onDataLoaded(){
+        Debug.Log("data loaded");
         var gameData = dataLoader.GetGameData();
         itemMan.PrepareItems(gameData);
         player.Setup(gameData.player);
