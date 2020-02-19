@@ -9,15 +9,15 @@ namespace Game.Params{
         public string name;
         public string prefab;
         public float roundDuration;
-        public float carLevelMultiplier;
-        public float baseValue;
+        public int carLevelMultiplier;
+        public int baseValue;
         public float powerBase; 
     }
 
     [System.Serializable]
     public class PlayerParams{
         public int initialCash;
-        public int boostDuration;
+        public float boostDuration;
         public float playerLevelMultiplier;
     }
 

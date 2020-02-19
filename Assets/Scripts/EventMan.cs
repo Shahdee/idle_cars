@@ -5,43 +5,101 @@ using UnityEngine.Events;
 
 public static class EventMan 
 {
-    public static UnityAction<GameMan.GameStates> onGameStateChangeCallback;
-    public static void AddGameStateChangeListener(UnityAction<GameMan.GameStates> listener){
-        onGameStateChangeCallback += listener;
+ 
+#region Player
+
+    public static UnityAction<long> onPlayerCashChangeCallback;
+
+    public static void AddPlayerCashChangeListener(UnityAction<long> listener){
+        onPlayerCashChangeCallback += listener;
     }
 
-    public static void RemoveGameStateChangeListener(UnityAction<GameMan.GameStates> listener){
-        onGameStateChangeCallback -= listener;
+    public static void OnPlayerCashChange(long value){
+        if (onPlayerCashChangeCallback != null)
+            onPlayerCashChangeCallback(value);
     }
 
-    public static void OnGameStateChange(GameMan.GameStates state){
-        if (onGameStateChangeCallback != null)
-            onGameStateChangeCallback(state);
+    public static UnityAction<int> onPlayerLevelChangeCallback;
+
+    public static void AddPlayerLevelChangeListener(UnityAction<int> listener){
+        onPlayerLevelChangeCallback += listener;
+    }
+
+    public static void OnPlayerLevelChange(int value){
+        if (onPlayerLevelChangeCallback != null)
+            onPlayerLevelChangeCallback(value);
+    }
+
+     public static UnityAction<int> onPlayerAknowledgedLevelChangeCallback;
+
+    public static void AddPlayerAknowledgedLevelChangeListener(UnityAction<int> listener){
+        onPlayerAknowledgedLevelChangeCallback += listener;
+    }
+
+    public static void OnPlayerAknowledgedLevelChange(int value){
+        if (onPlayerAknowledgedLevelChangeCallback != null)
+            onPlayerAknowledgedLevelChangeCallback(value);
     }
 
 
-#region Game starts and ends
-    public static UnityAction onGameStartCallback;
+#region Car
+    // public static UnityAction<int> onPlayerBoughtCarCallback;
 
-    public static void AddGameStartListener(UnityAction listener){
-        onGameStartCallback += listener;
+    // public static void AddPlayerBoughtCarListener(UnityAction<int> listener){
+    //     onPlayerBoughtCarCallback += listener;
+    // }
+
+    // public static void OnPlayerBoughtCar(int value){
+    //     if (onPlayerBoughtCarCallback != null)
+    //         onPlayerBoughtCarCallback(value);
+    // }
+
+    public static UnityAction<int> onPlayerUpgradedCarCallback;
+
+    public static void AddPlayerUpgradedCarListener(UnityAction<int> listener){
+        onPlayerUpgradedCarCallback += listener;
     }
 
-    public static void OnGameStart(){
-        if (onGameStartCallback != null)
-            onGameStartCallback();
+    public static void OnPlayerUpgradedCar(int value){
+        if (onPlayerUpgradedCarCallback != null)
+            onPlayerUpgradedCarCallback(value);
     }
 
-    public static UnityAction onGameEndedCallback;
+   public static UnityAction<int, int> onCarLevelChangeCallback;
 
-    public static void AddGameEndedListener(UnityAction listener){
-        onGameEndedCallback += listener;
+    public static void AddCarLevelChangeListener(UnityAction<int, int> listener){
+        onCarLevelChangeCallback += listener;
     }
 
-    public static void OnGameEnded(){
-        if (onGameEndedCallback != null)
-            onGameEndedCallback();
+    public static void OnCarLevelChange(int carID, int level){
+        if (onCarLevelChangeCallback != null)
+            onCarLevelChangeCallback(carID, level);
     }
+
+#endregion
+
+    public static UnityAction<float> onBoostActivateCallback;
+
+    public static void AddBoostActivateListener(UnityAction<float> listener){
+        onBoostActivateCallback += listener;
+    }
+
+    public static void OnBoostActivate(float timeLeft){
+        if (onBoostActivateCallback != null)
+            onBoostActivateCallback(timeLeft);
+    }
+
+    public static UnityAction onBoostDeactivateCallback;
+
+    public static void AddBoostDeactivateListener(UnityAction listener){
+        onBoostDeactivateCallback += listener;
+    }
+
+    public static void OnBoostDeactivate(){
+        if (onBoostDeactivateCallback != null)
+            onBoostDeactivateCallback();
+    }
+
 #endregion
 
 }

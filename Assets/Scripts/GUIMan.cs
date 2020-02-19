@@ -11,6 +11,9 @@ public class GUIMan : MonoBehaviour, IUpdatable
     Queue<WinControllerBase> delayedWindows = new Queue<WinControllerBase>();
 
      public void Init(){
+
+        EventMan.AddPlayerLevelChangeListener(PlayerLevelChanged);
+
         InitWindows();
         OpenWindow(WinViewBase.WinType.Gameplay);
     }
@@ -42,9 +45,13 @@ public class GUIMan : MonoBehaviour, IUpdatable
         return null;
     }
 
+    void PlayerLevelChanged(int level){
+        OpenWindow(WinViewBase.WinType.LevelUp);
+    }
+
     public void OpenWindow(WinViewBase.WinType wType){
 
-        Debug.Log("open " + wType);
+        // Debug.Log("open " + wType);
 
         var win = GetWindow(wType);
         if (win == null) return;
@@ -56,14 +63,14 @@ public class GUIMan : MonoBehaviour, IUpdatable
             TryOpenDelayedWindow();
         }
         else{
-            Debug.Log("add to delayed");
+            // Debug.Log("add to delayed");
             delayedWindows.Enqueue(win);
         }
     }
 
     public void CloseWindow(WinControllerBase window){
 
-        Debug.Log("close " + window.view.windowType);
+        // Debug.Log("close " + window.view.windowType);
 
         var win = currentWindows.Peek();
         if (win == window){
@@ -86,7 +93,7 @@ public class GUIMan : MonoBehaviour, IUpdatable
     }
 
     bool CanOpenWindow(WinViewBase.WinType wType){
-        Debug.Log("can open " + wType);
+        // Debug.Log("can open " + wType);
         switch(wType){
             case WinViewBase.WinType.LevelUp:
                 return (currentWindows.Count == 1);
@@ -98,13 +105,13 @@ public class GUIMan : MonoBehaviour, IUpdatable
 
     void AddWindowToDelayed(WinViewBase window){
         if (window != null){
-            Debug.Log("AddWindowToDelayed " + window);
+            // Debug.Log("AddWindowToDelayed " + window);
             
         }
     }
 
     bool TryOpenDelayedWindow(){
-        Debug.Log("TryOpenDelayedWindow");
+        // Debug.Log("TryOpenDelayedWindow");
         if (delayedWindows.Count > 0){
             var window = delayedWindows.Dequeue();
             if (window != null){              
@@ -119,6 +126,7 @@ public class GUIMan : MonoBehaviour, IUpdatable
     
     public void UpdateMe(float delta)
     {
-        
+        foreach(var window in currentWindows)
+            window.view.UpdateMe(delta);
     }
 }

@@ -70,12 +70,11 @@ public class EntityMan : MonoBehaviour
 
     public void ReturnEntity(ReusableObject robj){
 
-        robj.ClearForBuffer();
-
         // Debug.Log("ReturnToPool " + obj);
 
+        robj.ClearForBuffer();
         robj.gameObject.transform.SetParent(trsPoolParent);
-        // robj.gameObject.SetActive(false);
+        robj.gameObject.SetActive(false);
     }
 
     public GameObject GetScrollElement(){

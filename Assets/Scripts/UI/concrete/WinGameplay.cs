@@ -7,18 +7,17 @@ public class WinGameplay : WinViewBase
 {
     public Text level; 
     public Text cash;
-    public Button btnCars;
+    public CommonButton btnCars;
     public Button btnTest;
-
-    // TODO 2x button 
+    public CommonButton btnBoost;
 
     protected override void InInit(){
-        btnCars.onClick.AddListener(CarsClick);
+        btnCars.OnBtnClickAddListener(CarsClick);
         btnTest.onClick.AddListener(TestClick);
-
+        btnBoost.OnBtnClickAddListener(BoostClick);
     }
 
-    void CarsClick(){
+    void CarsClick(CommonButton btn){
         (controller as WinGameplayController).SendCheckCars();
     }
 
@@ -26,21 +25,52 @@ public class WinGameplay : WinViewBase
         (controller as WinGameplayController).SendTest();
     }
 
-
-    // void SetLives(int lvs){
-    //     lives.text = "lives " + lvs.ToString();
-    // }
-
-    protected override void OnShow(){
-
-        // int lives = GameMan.instance.GetPlayer().currLives;
-        // SetLives(lives);
-
-        // int level = LevelMan.instance.currLevel;
-        // SetLevel(level);
+    void BoostClick(CommonButton btn){
+        (controller as WinGameplayController).SendBoostCars();
     }
 
-    void SetLevel(int lvl){
-        // level.text = "level " + (lvl + 1).ToString();
+    bool timerActive = false;
+    float currTimeLeft = 0;
+
+    public void SetSpeedUpTimer(float timeLeft){
+        timerActive = true;
+        currTimeLeft = timeLeft;
+        btnBoost.SetActive(false);
+    }
+
+    public void SetSpeedUpButton(){
+        timerActive = false;
+
+        btnBoost.SetHeader("boost");
+        btnBoost.SetActive(true);
+    }
+
+    public void SetCash(long value){
+        cash.text = value.ToString();
+    }
+
+    protected override void OnShow(){
+       
+    }
+
+    public void SetLevel(int lvl){
+        level.text = "level " + lvl.ToString();
+    }
+
+    public override void UpdateMe(float deltaTime){        
+        UpdateTimer(deltaTime);
+    }
+
+    void UpdateTimer(float deltaTime){
+        if (! timerActive) return;
+       
+        if (currTimeLeft > 0){
+            currTimeLeft -= deltaTime;
+        }
+        else{
+            timerActive = false;      
+            currTimeLeft = Mathf.Max(0, currTimeLeft);     
+        }
+        btnBoost.SetHeader(currTimeLeft.ToString());
     }
 }

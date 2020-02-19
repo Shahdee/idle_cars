@@ -1,11 +1,8 @@
 {
-	"cars":[
-		{"id": 0, "name": "Normal", "prefab": "NormalCar", "roundDuration": 3, "carLevelMultiplier": 0.5, "baseValue":2, "powerBase":3}	
-	],
-
-	"player":{
-		"initialCash" : 10,
-		"boostDuration": 120,
-		"playerLevelMultiplier": 1.5
-	}
+    "cars":
+    [
+        {"id":0,"name":"Normal","prefab":"NormalCar","roundDuration":5.0,"carLevelMultiplier":2,"baseValue":6,"powerBase":1.1319999694824219}
+    ],
+    
+    "player":{"initialCash":10,"boostDuration":5.0,"playerLevelMultiplier":1.5}
 }

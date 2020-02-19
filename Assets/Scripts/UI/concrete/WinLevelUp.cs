@@ -5,28 +5,35 @@ using UnityEngine.UI;
 
 public class WinLevelUp : WinViewBase
 {
-    public Button btnContinue;
+    public Text level;
+    public Text income;
+    public CommonButton btnContinue;
+    public Button btnBackground;
 
     protected override void InInit(){
-        btnContinue.onClick.AddListener(ContinueClick);
+        btnContinue.OnBtnClickAddListener(ContinueClick);
+        btnBackground.onClick.AddListener(BackgroundClick);
     }
 
-    void ContinueClick(){
+    void BackgroundClick(){
+        ContinueClick(null);
+    }
+
+    void ContinueClick(CommonButton btn){
         (controller as WinLevelUpController).SendContinue();
+    }
+
+    public void SetLevel(int lvl){
+        level.text = "Level " + lvl.ToString() + " reached";
     }
 
     protected override void OnShow(){
 
-        // int lives = GameMan.instance.GetPlayer().currLives;
-        // SetLives(lives);
-
-        // int level = LevelMan.instance.currLevel;
-        // SetLevel(level);
+      
     }
 
     protected override void OnHide(){
-        // instead of disable
-        //implement in derived
+       
     }
 }
 

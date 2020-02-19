@@ -24,8 +24,12 @@ public class CommonButton : UIObject
         button.onClick.AddListener(ButtonClick);
     }
 
-    public void SetHeader(){
+    public void SetActive(bool active){
+        button.interactable = active;
+    }
 
+    public void SetHeader(string txt){
+        header.text = txt;
     }
 
     public void SetIcon(){

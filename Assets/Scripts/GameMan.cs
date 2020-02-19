@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameMan : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class GameMan : MonoBehaviour
     public LevelMan levelMan;
     DataLoader dataLoader;
     Player player;
-
-    public InputMan inputMan;
 
     static GameMan _instance;
     public static GameMan instance{
@@ -42,16 +41,6 @@ public class GameMan : MonoBehaviour
         return player;
     }
 
-    public InputMan GetInputMan(){
-        return inputMan;
-    }
-
-    public enum GameStates{
-        Menu,
-        Play,
-        Over,
-    }
-
     void Start()
     {
         instance = this;
@@ -71,19 +60,12 @@ public class GameMan : MonoBehaviour
         player.Setup(gameData.player);
     }
 
-    public void StartGame(){
-        player.Restore();
-        levelMan.StartLevel();
-    }
-
-
     void FixedUpdate(){
         levelMan.UpdatePhysics(Time.fixedDeltaTime);
     }
     
     void Update()
     {
-        inputMan.UpdateMe(Time.deltaTime);        
         levelMan.UpdateMe(Time.deltaTime);       
         guiMan.UpdateMe(Time.deltaTime);
     }

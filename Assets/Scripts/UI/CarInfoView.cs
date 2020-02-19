@@ -58,15 +58,45 @@ public class CarInfoView : UIObject
         set{_carID = value;}
     }
    
-   public void Setup(Car car){
+   public void Setup(Car car, Player player){
 
-        Debug.Log("Setup " + car.parameters.id);
+        // Debug.Log("Setup " + car.parameters.id);
 
-        carID = car.parameters.id;
-        carName.text = car.parameters.name;
-        level.text = car.currLevel.ToString();
+        carID = car.parameters.id;    
+
+        UpdateInfo(car, player);
+   }
+
+   public void UpdateInfo(Car car, Player player){
+        carName.text = car.parameters.name;        
         roundDuration.text = car.parameters.roundDuration.ToString();
-        incomePerRound.text = car.GetCarIncomePerRound().ToString();
+
+        UpdateDynamicInfo(car, player);
+   }    
+
+   public void UpdateDynamicInfo(Car car, Player player){
+        bool hasCar = player.hasCar(car.parameters.id);
+
+        level.gameObject.SetActive(hasCar);
+        incomePerRound.gameObject.SetActive(hasCar);
+
+        long price = car.GetCarPrice();
+        bool enoughCash = player.isEnoughCash(price);
+
+        UpdateSpendCashButton(price, enoughCash);
+
+        if (hasCar){
+            level.text = car.currLevel.ToString();
+            var income = FormulaHandler.GetCarIncomePerRound(car, player);
+            incomePerRound.text = income.ToString();            
+        }
+   }
+
+   void UpdateSpendCashButton(long value, bool enough){
+
+       btnSpendCash.enabled = enough;
+       btnSpendCash.SetHeader(value.ToString()); // TODO format
+
    }
 
    public override void ClearForBuffer(){

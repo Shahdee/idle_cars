@@ -14,15 +14,17 @@ public class Car
         private set{_params = value;}
     }
 
+    const int defaultCarLevel = 0;
+
     int _currLevel;
     public int currLevel{
         get{return _currLevel;}
-        set{_currLevel = value;}
-    }
+        set{
+            _currLevel = value;
 
-    // income 
-    // upgrade cost
-    // events 
+            EventMan.OnCarLevelChange(parameters.id, currLevel);
+        }
+    }
 
    public void Setup(CarParams prms){
        parameters = prms;
@@ -35,17 +37,22 @@ public class Car
    }
 
    void SetParams(){
-
+       currLevel = defaultCarLevel;
    }
 
-   public int GetCarIncomePerRound(){
-       // TODO - dependancy on player: PlayerLevelMultiplier formula 
-
-       return 13;
+   public void Buy(){
+       Upgrade();
    }
 
-   public int GetCarUpgradeCost(){
+   public void Upgrade(){
+       currLevel++;
+   }
 
-       return 666;
+   public long GetCarIncomePerRound(){
+       return (currLevel * parameters.carLevelMultiplier);
+   }
+
+   public long GetCarPrice(){
+       return (long)(parameters.baseValue * Mathf.Pow(parameters.powerBase, currLevel));
    }
 }

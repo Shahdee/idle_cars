@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarController 
 {
@@ -16,22 +17,55 @@ public class CarController
         private set{_view = value;}
     }
 
+    UnityAction<CarController> onCrossFinishLineCallback;
+
+    public void AddFinishLineCrossListener(UnityAction<CarController> listener){
+        onCrossFinishLineCallback += listener;
+    }
+
+    public void RemoveFinishLineCrossListener(UnityAction<CarController> listener){
+        onCrossFinishLineCallback -= listener;
+    }
+
+    void OnFinishLineCross(){
+        if (onCrossFinishLineCallback != null)
+            onCrossFinishLineCallback(this);
+    }
+
     public CarController(Car m){
         model = m;
 
         CreateView();
+        PutCarOnStart();
     }
-
 
     void CreateView(){
         GameObject gobject = GameMan.instance.GetEntityMan().GetEntity(model.parameters.prefab);
         gobject.SetActive(true);     
-        gobject.transform.SetParent(LevelMan.instance.trsParent); // TODO put correct object
-
         view = gobject.GetComponent<CarView>();
+
+        view.AddFinishLineCrossListener(CarMadeACircle);
+    }
+
+    void CarMadeACircle(){
+        OnFinishLineCross();
+    }
+
+    void PutCarOnStart(){
+        view.transform.SetParent(LevelMan.instance.trsParent); // TODO put correct object
+        view.transform.position = LevelMan.instance.trsFinishLineArea.position;
+
+        view.Launch(model.parameters.roundDuration);
+    }
+
+    public void SpeedUp(float value){
+        view.SpeedUp(value);
     }
 
     void ReleaseView(){
-        //
+        if (view != null){
+            GameMan.instance.GetEntityMan().ReturnEntity(view);
+            view = null;
+        }   
     }
 }
