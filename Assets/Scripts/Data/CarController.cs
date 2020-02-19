@@ -52,7 +52,7 @@ public class CarController
     }
 
     void PutCarOnStart(){
-        view.transform.SetParent(LevelMan.instance.trsParent); // TODO put correct object
+        view.transform.SetParent(LevelMan.instance.trsParent); 
         view.transform.position = LevelMan.instance.trsFinishLineArea.position;
 
         view.Launch(model.parameters.roundDuration);

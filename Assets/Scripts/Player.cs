@@ -22,8 +22,15 @@ public class Player
         private set{
             _currLevel = value;
 
+            currCashCap = GetCashCap(_currLevel);
+            // Debug.Log("lvl= " + _currLevel + " cash cap= " + currCashCap);
+
             EventMan.OnPlayerLevelChange(currLevel);
         }
+    }
+
+    long GetCashCap(int level){
+        return (long)(parameters.baseValue * Mathf.Pow(parameters.powerBase, level));
     }
 
     int _currAknowledgedLevel;
@@ -46,8 +53,14 @@ public class Player
         }
     }
 
-    public long GetIncomeMultiplier(){
-        return (long)(1 + (currAknowledgedLevel - 1) * parameters.playerLevelMultiplier);
+    long currCashCap;
+
+    public float GetRealIncomeMultiplier(){
+        return (1 + (currLevel - 1) * parameters.playerLevelMultiplier);
+    }
+
+    public float GetIncomeMultiplier(){
+        return (1 + (currAknowledgedLevel - 1) * parameters.playerLevelMultiplier);
     }
 
     List<int> boughtCars = new List<int>();
@@ -98,6 +111,9 @@ public class Player
 
    public void AddCash(long value){
        currCash += value;
+
+        if (currCash >= currCashCap)
+            LevelUp();
    }
 
    public bool TryTakeCash(long value){

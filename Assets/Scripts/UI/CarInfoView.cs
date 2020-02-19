@@ -67,9 +67,13 @@ public class CarInfoView : UIObject
         UpdateInfo(car, player);
    }
 
+   static string sduration = "duration: ";
+   static string sincome = "income: ";
+   static string slevel = "level: ";
+
    public void UpdateInfo(Car car, Player player){
         carName.text = car.parameters.name;        
-        roundDuration.text = car.parameters.roundDuration.ToString();
+        roundDuration.text = sduration + car.parameters.roundDuration.ToString();
 
         UpdateDynamicInfo(car, player);
    }    
@@ -86,17 +90,15 @@ public class CarInfoView : UIObject
         UpdateSpendCashButton(price, enoughCash);
 
         if (hasCar){
-            level.text = car.currLevel.ToString();
+            level.text = slevel + car.currLevel.ToString();
             var income = FormulaHandler.GetCarIncomePerRound(car, player);
-            incomePerRound.text = income.ToString();            
+            incomePerRound.text = sincome + income.ToString();            
         }
    }
 
    void UpdateSpendCashButton(long value, bool enough){
-
-       btnSpendCash.enabled = enough;
+       btnSpendCash.SetActive(enough);
        btnSpendCash.SetHeader(value.ToString()); // TODO format
-
    }
 
    public override void ClearForBuffer(){

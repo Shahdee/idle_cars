@@ -71,7 +71,7 @@ public class LevelMan : MonoBehaviour, IUpdatable, IFixUpdatable
 
             GameMan.instance.GetPlayer().AddCar(carModel.parameters.id);
 
-            Debug.Log("car bought");
+            // Debug.Log("car bought");
 
             carModel.Buy();
 
@@ -90,19 +90,19 @@ public class LevelMan : MonoBehaviour, IUpdatable, IFixUpdatable
 
              carModel.Upgrade();
 
-             Debug.Log("car upgraded");
+            //  Debug.Log("car upgraded");
         }
         else{
-            Debug.Log("not enough cash");
+            // Debug.Log("not enough cash");
         }
     }
 
     public void CarCrossedFinishLine(CarController carController){
         long cash = FormulaHandler.GetCarIncomePerRound(carController.model, GameMan.instance.GetPlayer());
+        // Debug.Log("car earned " + cash);
         GameMan.instance.GetPlayer().AddCash(cash);
     }
 
-    // TODO - invoke from ui
     public void LevelUp(){
         GameMan.instance.GetPlayer().AknowledgeLevel();
     }
@@ -125,7 +125,7 @@ public class LevelMan : MonoBehaviour, IUpdatable, IFixUpdatable
 
     void ActivateBoost(){
         if (stadiumCars.Count == 0){
-            Debug.Log("nothing to boost");
+            // Debug.Log("nothing to boost");
         }
         else{
             boostActive = true;

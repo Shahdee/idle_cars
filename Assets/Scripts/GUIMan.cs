@@ -46,6 +46,9 @@ public class GUIMan : MonoBehaviour, IUpdatable
     }
 
     void PlayerLevelChanged(int level){
+
+        Debug.Log(">>> PlayerLevelChanged " + level);
+
         OpenWindow(WinViewBase.WinType.LevelUp);
     }
 
@@ -55,6 +58,11 @@ public class GUIMan : MonoBehaviour, IUpdatable
 
         var win = GetWindow(wType);
         if (win == null) return;
+
+        if (win.view.isVisibile()){
+            // Debug.Log("win is already open " + wType);
+            return;
+        }
 
         if (CanOpenWindow(wType)){
             currentWindows.Push(win);

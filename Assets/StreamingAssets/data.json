@@ -1,8 +1,1 @@
-{
-    "cars":
-    [
-        {"id":0,"name":"Normal","prefab":"NormalCar","roundDuration":5.0,"carLevelMultiplier":2,"baseValue":6,"powerBase":1.1319999694824219}
-    ],
-    
-    "player":{"initialCash":10,"boostDuration":5.0,"playerLevelMultiplier":1.5}
-}
+{"cars":[{"id":0,"name":"Normal","prefab":"NormalCar","roundDuration":5.0,"carLevelMultiplier":2,"baseValue":6,"powerBase":1.1319999694824219},{"id":1,"name":"Yellow","prefab":"YellowCar","roundDuration":4.75,"carLevelMultiplier":54,"baseValue":24,"powerBase":1.1549999713897706},{"id":2,"name":"Green","prefab":"GreenCar","roundDuration":4.5,"carLevelMultiplier":486,"baseValue":280,"powerBase":1.1449999809265137},{"id":3,"name":"Red","prefab":"RedCar","roundDuration":4.25,"carLevelMultiplier":2592,"baseValue":3552,"powerBase":1.1349999904632569},{"id":4,"name":"Orange","prefab":"OrangeCar","roundDuration":4.0,"carLevelMultiplier":31104,"baseValue":41600,"powerBase":1.125},{"id":5,"name":"Black","prefab":"BlackCar","roundDuration":3.75,"carLevelMultiplier":298596,"baseValue":559870,"powerBase":1.1150000095367432}],"player":{"initialCash":10,"boostDuration":120.0,"playerLevelMultiplier":0.5,"baseValue":5,"powerBase":4.0}}

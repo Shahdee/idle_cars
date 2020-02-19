@@ -37,7 +37,7 @@ public class WinCars : WinViewBase
 
     public void InitScroll(Car[] cars, Player player){
 
-        Debug.Log("init scroll");
+        // Debug.Log("init scroll");
 
         GameObject element;
         CarInfoView view;

@@ -2585,6 +2585,26 @@ MonoBehaviour:
       type: 3}
     amountToPool: 1
     expandable: 1
+  - prototype: {fileID: 4834782080356011105, guid: 6cd01d0206da04bb1ab4284454ca8927,
+      type: 3}
+    amountToPool: 1
+    expandable: 1
+  - prototype: {fileID: 4834782080356011105, guid: cc67e7693a3444642952c4816413c33a,
+      type: 3}
+    amountToPool: 1
+    expandable: 1
+  - prototype: {fileID: 4834782080356011105, guid: 8b10babac68cc43bfb6a5e85e2a5d9be,
+      type: 3}
+    amountToPool: 1
+    expandable: 1
+  - prototype: {fileID: 4834782080356011105, guid: 1e2cd62dead0345f481671c86afececf,
+      type: 3}
+    amountToPool: 1
+    expandable: 1
+  - prototype: {fileID: 4834782080356011105, guid: d7754c43a785a4b40bde57f08e66f5c5,
+      type: 3}
+    amountToPool: 1
+    expandable: 1
   trsPoolParent: {fileID: 801600877}
 --- !u!114 &874475616
 MonoBehaviour:
@@ -4438,7 +4458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000008035945}
+  m_AnchoredPosition: {x: 0, y: -0.000005132994}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2053218481

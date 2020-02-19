@@ -23,8 +23,20 @@ public class WinLevelUp : WinViewBase
         (controller as WinLevelUpController).SendContinue();
     }
 
+    static string sincome = "income X ";
+    static string slevel = "level reached ";
+
     public void SetLevel(int lvl){
-        level.text = "Level " + lvl.ToString() + " reached";
+        if (! isVisibile()) return;
+
+        level.text = slevel + lvl.ToString();
+    }
+
+    public void SetIncome(float value){
+
+        if (! isVisibile()) return;
+
+        income.text = sincome + value.ToString();
     }
 
     protected override void OnShow(){

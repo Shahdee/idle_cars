@@ -32,16 +32,23 @@ public class WinGameplay : WinViewBase
     bool timerActive = false;
     float currTimeLeft = 0;
 
+    int prevTimeCapped =0;
+    int currTimeCapped = 0;
+
     public void SetSpeedUpTimer(float timeLeft){
         timerActive = true;
         currTimeLeft = timeLeft;
+        prevTimeCapped = (int)timeLeft;
+        currTimeCapped = 0;
         btnBoost.SetActive(false);
     }
+
+    static string sboost = "boost";
 
     public void SetSpeedUpButton(){
         timerActive = false;
 
-        btnBoost.SetHeader("boost");
+        btnBoost.SetHeader(sboost);
         btnBoost.SetActive(true);
     }
 
@@ -71,6 +78,12 @@ public class WinGameplay : WinViewBase
             timerActive = false;      
             currTimeLeft = Mathf.Max(0, currTimeLeft);     
         }
-        btnBoost.SetHeader(currTimeLeft.ToString());
+
+        prevTimeCapped = (int)currTimeLeft;
+
+        if (currTimeCapped != prevTimeCapped){
+            currTimeCapped = prevTimeCapped;
+            btnBoost.SetHeader(currTimeCapped.ToString());
+        }
     }
 }

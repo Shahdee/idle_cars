@@ -31,12 +31,6 @@ public class WinGameplayController : WinControllerBase
 
         PlayerCashChange(cash);
         PlayerLevelChange(level);        
-
-        // check boost 
-
-        HandleBoost();
-
-        // GameMan.instance.levelMan.
     }
 
     void HandleBoost(){
@@ -50,11 +44,11 @@ public class WinGameplayController : WinControllerBase
     }
 
     void BoostActivated(float timeLeft){
-
+        HandleBoost();
     }
 
     void BoostDeactivated(){
-
+        HandleBoost();
     }
 
     public void SendCheckCars(){

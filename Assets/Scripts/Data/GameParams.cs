@@ -19,6 +19,8 @@ namespace Game.Params{
         public int initialCash;
         public float boostDuration;
         public float playerLevelMultiplier;
+        public int baseValue;
+        public float powerBase; 
     }
 
     // ? do I need it 

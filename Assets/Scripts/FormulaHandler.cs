@@ -6,10 +6,9 @@ public static class FormulaHandler
 {
     public static long GetCarIncomePerRound(Car car, Player player){
 
-        var income = car.GetCarIncomePerRound();
-        var multiplier = player.GetIncomeMultiplier();
+        long income = car.GetCarIncomePerRound();
+        float multiplier = player.GetIncomeMultiplier();
 
-        return income * multiplier;
-
+        return (long)(income * multiplier);
     }
 }

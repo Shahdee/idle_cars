@@ -14,18 +14,20 @@ public class WinLevelUpController : WinControllerBase
     }
 
     void PlayerLevelChange(int level){
+        float income = GameMan.instance.GetPlayer().GetRealIncomeMultiplier();
         winLevelUp.SetLevel(level);
+        winLevelUp.SetIncome(income);
     }
 
     protected override void InOpen(){
         int level = GameMan.instance.GetPlayer().currLevel;
+        float income = GameMan.instance.GetPlayer().GetRealIncomeMultiplier();
         winLevelUp.SetLevel(level);
+        winLevelUp.SetIncome(income);
     }
 
     public void SendContinue(){
-
-        // TODO apply multiplier 
-
+        LevelMan.instance.LevelUp();
         GameMan.instance.GetGUIMan().CloseWindow(this);
     }
 
